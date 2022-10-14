@@ -1,0 +1,107 @@
+{% extends "app/base_site.html" %}
+
+{% block title %} Home {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="right_col" role="main">
+      <div class="">
+        <div class="page-title">
+          <div class="title_left">
+            <h3>Página Inicial</h3>
+          </div>
+        </div>
+
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                  {% for message in messages %}
+                  <div class="alert alert-{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}danger{%else%}success{% endif %} alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                    </button>
+                    {{ message }}
+                  </div>
+                  {% endfor %}
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="x_panel">
+                    <div class="x_title">
+                      <h2>Notícias do Dia</h2>
+                      <div class="clearfix"></div>
+                    </div>
+                    <form method="POST">
+                      {% csrf_token %}
+                    <div class="x_content">
+                        <div class="input-group">
+                            <input type="text" name = "q" class="form-control" placeholder="Introduza um tópico">
+                            <span class="input-group-btn">
+                                              <button type="submit" class="btn btn-success">Procurar</button>
+                                            </span>
+                                              <select id="size" name = "size">
+                                                  <option value="5">5</option>
+                                                  <option value="10">10</option>
+                                                  <option value="15">15</option>
+                                                  <option value="20">20</option>
+                                              </select>
+                          </div>
+                        </form>
+                      <ul class="list-unstyled timeline">
+                        {% for news in response.articles %}
+                        <li>
+                          <div class="block">
+                            <div class="tags">
+                              <a href="" class="tag">
+                                <span>{{ news.source.name}}</span>
+                              </a>
+                            </div>
+                            <div class="block_content">
+                              <h2 class="title">
+                                              <a href="{{news.url}}">{{news.title}}</a>
+                                          </h2>
+                              <div class="byline">
+                                <span>{{news.publishedAt}}</span> by <a>{{news.author}}</a>
+                              </div>
+                              <p class="excerpt">{{news.description}}<a href="{{news.url}}">Read&nbsp;More</a>
+                              </p>
+                            </div>
+                          </div>
+                        </li>
+                        {% endfor %}
+                      </ul>
+          
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="x_panel">
+                    <div class="x_title">
+                      <h2>Meteorologia</h2>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <a class="weatherwidget-io" href="https://forecast7.com/pt/39d36n9d32/ferrel/" data-label_1="Ferrel" data-label_2="Meteorologia" data-theme="original" >Ferrel Meteorologia</a>
+                        <script>
+                        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                        </script>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super }}
+{% endblock javascripts %}
+

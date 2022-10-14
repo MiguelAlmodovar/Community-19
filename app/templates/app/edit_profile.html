@@ -1,0 +1,58 @@
+{% extends "app/base_site.html" %}
+
+{% block title %} Editar perfil {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="right_col" role="main">
+      <div class="">
+        <div class="page-title">
+          <div class="title_left">
+            <h3>Editar Perfil</h3>
+          </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_content">
+                  {% for message in messages %}
+                  <div class="alert alert-{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}danger{%else%}success{% endif %} alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                    </button>
+                    {{ message }}
+                  </div>
+                  {% endfor %}
+                <br>
+                <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" method="POST" action="" enctype="multipart/form-data" novalidate="">
+                  {% csrf_token%}
+                  <p><label for="id_username">Username:</label> <input type="text" name="username" value="{{request.user.username}}" maxlength="150" required="" id="id_username"></p>
+        <p><label for="id_first_name">Primeiro nome:</label> <input type="text" name="first_name" value="{{request.user.first_name}}" maxlength="30" required="" id="id_first_name"></p>
+        <p><label for="id_last_name">Último nome:</label> <input type="text" name="last_name" value="{{request.user.last_name}}" maxlength="150" required="" id="id_last_name"></p>
+        <p><label for="id_email">E-mail:</label> <input type="email" name="email" value="{{request.user.email}}"  required="" maxlength="254" id="id_email"></p>
+        
+        </div> <span class="helptext">Para alterar a sua password, clique <a href="{% url 'reset_password' %}">aqui</a>.</span><p></p>
+                  <p><label for="id_profile_pic">Imagem de perfil:</label> Atualmente: <a href="{{request.user.profile.profile_pic.url}}">1c419e73-0e7d-4e74-b6aa-db9e9af66f88.JPG</a><br>
+        Change:
+        <input required="" type="file" name="profile_pic" accept="image/*" id="id_profile_pic"></p>
+                              <button type="submit" class="btn btn-success">Alterar</button>
+                            </form>
+                  </div>
+                </form>
+              </div>
+            </div>
+      </div>
+    </div>
+    
+          </div>
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super }}
+  <script src="/static/edit_profile.js"></script>
+{% endblock javascripts %}
+

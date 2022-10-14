@@ -1,0 +1,91 @@
+{% extends "app/base_site.html" %}
+
+{% block title %} Criar anúncio {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+<div class="right_col" role="main">
+    <div class="page-title">
+        <div class="title_left">
+          <h3>Criar Anúncio</h3>
+        </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <br/>
+              <form id="demo-form2" method = 'POST' data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data" novalidate>
+                  {% csrf_token %}
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Título<span class="required">*</span>
+          </label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" id="title" required="required" name ="title" class="form-control col-md-7 col-xs-12" maxlength = "20">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Descrição <span class="required">*</span>
+          </label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <textarea maxlength= "300" id = "content" name = "content"  style="margin: 0px; width: 599px; height: 94px;"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Contacto</label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input id="contact" name = "contact" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" maxlength = "50">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo</label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div id="gender" class="btn-group" data-toggle="buttons">
+              <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                <input type="radio" name="category" value="Comercial" id = "category"> &nbsp; Comercial &nbsp;
+              </label>
+              <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                <input type="radio" name="category" value="Voluntariado" id = "category" required = true> Voluntário
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="picture" class="control-label col-md-3 col-sm-3 col-xs-12">Imagem</label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type="file" name="imagem"> 
+          </div>
+        </div>
+        <div class="alert alert-danger alert-dismissible fade in" role="alert" id="errorDiv" style = "display: none">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+          </button>
+          <div id = "errorMessage"></div>
+        </div>
+        <div class="ln_solid"></div>
+        <div class="form-group">
+          <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+            <button type="submit" class="btn btn-success" value = "Upload">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock content %}
+
+  {% block javascripts %}
+  {{ block.super }}
+  <script src="/static/announcement.js"></script>
+{% endblock javascripts %}

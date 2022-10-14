@@ -1,0 +1,73 @@
+{% extends "app/base_site.html" %}
+
+{% block title %} Login {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <!-- Animate.css -->
+  <link href="/static/vendors/animate.css/animate.min.css" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block body_class %}login{% endblock body_class %}
+
+{% block body %}
+<div>
+  <a class="hiddenanchor" id="signup"></a>
+  <a class="hiddenanchor" id="signin"></a>
+
+  <div class="login_wrapper">
+    <div class="animate form login_form">
+      <section class="login_content">
+          <form method = "POST">
+            {% csrf_token %}
+            <h1>Registo</h1>
+            <div>
+                {{ form.username.errors }}
+         {{ form.username.label_tag }} {{ form.username }}
+              </div>
+              <div>
+                  {{ form.email.errors }}
+         {{ form.email.label_tag }} {{ form.email }}
+              </div>
+              <div>
+                  {{ form.first_name.errors }}
+         {{ form.first_name.label_tag }} {{ form.first_name }}
+              </div>
+              <div>
+                  {{ form.last_name.errors }}
+         {{ form.last_name.label_tag }} {{ form.last_name }}
+              </div>
+              <div>
+                  {{ form.password1.errors }}
+         {{ form.password1.label_tag }} {{ form.password1 }}
+              </div>
+              <div>
+                  {{ form.password2.errors }}
+              {{ form.password2.label_tag }} {{ form.password2 }}
+              </div>
+
+             
+          <div class="clearfix"></div>
+
+          <div class="separator">
+            <p class="change_link">Já registado?
+              <a href="{% url 'login_view' %}" class="to_register"> Log in </a>
+            </p>
+
+            <div class="clearfix"></div>
+            <br/>
+            <div>
+              <button class="btn btn-default submit" type="submit" name = "registerform">Register</a>
+            </div>
+            <div>
+              <h1><i class="fa fa-group"></i> Comunidade-19</h1>
+              <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+
+ 
+{% endblock %}
+

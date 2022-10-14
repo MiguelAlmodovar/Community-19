@@ -1,0 +1,68 @@
+{% extends "app/base_site.html" %}
+
+{% block title %} Plain Page {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="right_col" role="main">
+      <div class="">
+        <div class="page-title">
+          <div class="title_left">
+            <h3>Painel de Adminstração</h3>
+          </div>
+
+          
+        
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+          <br>
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Utilizadores Registados</h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    {% for message in messages %}
+                    <div class="alert alert-{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}danger{%else%}success{% endif %} alert-dismissible fade in" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                      </button>
+                      {{ message }}
+                    </div>
+                    {% endfor %}
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+						<th>Nome</th>
+						<th>Data de criação</th>
+                        <th>Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for user in users %}
+                      <tr>
+						<td>{{user.first_name}} {{user.last_name}}</td>
+						<td>{{user.date_joined}}</td>
+                        <td> 
+                          <a href="{% url 'deleteuser' user.id %}"><i class="fa fa-ban"></i></a></td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+				</div>
+			  </div>
+			</div>
+		</div>
+		</div>
+	  </div>
+	</div>
+	
+                </div>
+              </div>
+			</div>
+			
+{% endblock %}			

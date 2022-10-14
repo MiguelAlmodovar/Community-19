@@ -1,0 +1,105 @@
+{% extends "app/base_site.html" %}
+
+{% block title %} Anúncio {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="right_col" role="main">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h3>Anúncio</h3>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_content">
+              <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                  {% for message in messages %}
+                  <div class="alert alert-{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}danger{%else%}success{% endif %} alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                    </button>
+                    {{ message }}
+                  </div>
+                  {% endfor %}
+                <div class="profile_img">
+                  <div id="crop-avatar">
+                    <img class="img-responsive avatar-view" style="width:500px;height:300px;" src="{{announcement.picture.url}}" alt="Avatar" title="Change the avatar">
+                  </div>
+                </div>
+                <h3>{{announcement.title}}</h3>
+                <ul class="list-unstyled user_data">
+                  <li>
+                    <i class="fa fa-send"></i> {{announcement.contact}}
+                  </li>
+
+                  <li class="m-top-xs">
+                    {% if announcement.category == 'Voluntariado' %}
+                    <i class="fa fa-group"></i> Voluntariado
+                    {% else %}
+                    <i class="fa fa-eur"></i> Comercial
+                    {% endif %}
+                  </li>
+                  <li>
+                    <i class="glyphicon glyphicon-time"></i> {{announcement.date_created}}
+                  </li>
+                <li>
+                  <i class="fa fa-user"></i> {{announcement.author.first_name}} {{announcement.author.last_name}}
+                </li>
+                <li>
+                  <a href = "{% url 'report' announcement.id %}" ><i class="fa fa-thumbs-down"></i> Reportar </a>
+                </li>
+                {% if request.user == announcement.author %}
+                <li>
+                  <a href = "{% url 'deleteowna' announcement.id %}" ><i class="fa fa-close"></i> Apagar post </a>
+                </li>
+                {% elif request.user.is_superuser %}
+                <li>
+                    <a href = "{% url 'deletea' announcement.id %}" ><i class="fa fa-close"></i> Apagar post </a>
+                  </li>
+                {% endif %}
+                </ul>
+                <br/>
+              </div>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+
+                <div class="profile_title">
+                  <div class="col-md-6">
+                    <h2>Descrição do anúncio</h2>
+                  </div>
+                  <div class="col-md-6">
+                  
+                  </div>
+                </div>
+                      <p>{{announcement.content}} </p>
+                    </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super }}
+  <!-- morris.js -->
+  <script src="/static/vendors/raphael/raphael.min.js"></script>
+  <script src="/static/vendors/morris.js/morris.min.js"></script>
+{% endblock javascripts %}
+

@@ -1,0 +1,144 @@
+{% extends "app/base_site.html" %}
+
+{% block title %} Post {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="right_col" role="main">
+      <div class="">
+        <div class="page-title">
+          <div class="title_left">
+            <h3>Post</h3>
+          </div>
+        </div>
+        
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+                <div class="clearfix"></div>
+              <div class="x_content">
+                  {% for message in messages %}
+                  <body ng-app="ngAnimate">
+                  <div class="alert alert-{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}danger{%else%}success{% endif %} alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                    </button>
+                    {{ message }}
+                  </div>
+                </body>
+                  {% endfor %}
+                <div class="col-md-12">
+                  <div class="x_content">
+                      <ul class="list-unstyled msg_list">
+                          <li>
+                              <a href="{% url 'upvote' post.id %}"><i class="fa fa-thumbs-up"></i></a>
+                              <a href="{% url 'downvote' post.id %}"><i class="fa fa-thumbs-down"></i></a>
+                              <a href="{% url 'post' post.id %}"><i class="fa fa-comments"></i>{{post.ncomments}}</a>
+                              
+                            <a href="{% url 'post' post.id %}">
+                              <span class="image">
+                                <img src="{{post.author.profile.profile_pic.url}}" alt="img" style="width:70px;height:70px;"/>
+                              </span>
+                              <span>
+                                <span style="{% if post.author.is_superuser%} color:red {% endif %}">{{post.author.first_name}} {{post.author.last_name}}</span>
+                                <span class="time">{{post.date_created}}</span>
+                              </span>
+                              <br>
+                              <span class="message">
+                                  {{post.content}}
+                              </span> 
+                            </a>
+                            {% if post.picture %}
+                              <img  style="float:right ;width:400px;height:400px;" src="{{post.picture.url}}" alt="img" />
+                              
+                            {% else %}  
+                            {% if post.yt_link %}  
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{post.yt_link}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            {% endif %}
+                            {% endif %}
+                          </li>
+                      </ul>
+                      {% if post.reply_to  %}
+                      <a href="{% url 'post' post.reply_to.id %}"><i class="fa fa-reply"></i>Voltar ao comenário original</a>
+                      {% endif %}
+                      {% if request.user == post.author %}
+                        <a href = "{% url 'deleteownpost' post.id %}" ><i class="fa fa-close"></i> Apagar post </a>
+                      {% elif request.user.is_superuser %}
+                          <a href = "{% url 'deletepost' post.id %}" ><i class="fa fa-close"></i> Apagar post </a>
+                      {% endif %}
+                  </div>
+                      <br>
+                      <div class="clearfix"></div>
+                      {% if comments %}
+                      <h3>Comentários</h3>
+                      <div class="x_content">
+                          <ul class="list-unstyled msg_list">
+                              {% for post in comments %}
+                            <li>
+                                <a href="{% url 'upvote' post.id %}"><i class="fa fa-thumbs-up"></i></a>
+                                <a href="{% url 'downvote' post.id %}"><i class="fa fa-thumbs-down"></i></a>
+                                <a href="{% url 'post' post.id %}"><i class="fa fa-comments"></i>{{post.ncomments}}</a>
+                                
+                              <a href="{% url 'post' post.id %}">
+                                <span class="image">
+                                  <img src="{{post.author.profile.profile_pic.url}}" alt="img" style="width:70px;height:70px;"/>
+                                </span>
+                                <span>
+                                  <span style="{% if post.author.is_superuser%} color:red {% endif %}">{{post.author.first_name}} {{post.author.last_name}}</span>
+                                  <span class="time">{{post.date_created}}</span>
+                                </span>
+                                <br>
+                                <span class="message">
+                                    {{post.content}}
+                                </span> 
+                              </a>
+                              {% if post.picture %}
+                                <img  style="float:right ;width:400px;height:400px;" src="{{post.picture.url}}" alt="img" />
+                                
+                              {% else %}  
+                              {% if post.yt_link %}  
+                              <iframe width="560" height="315" src="https://www.youtube.com/embed/{{post.yt_link}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                              {% endif %}
+                              {% endif %}
+                            </li>
+                            {% endfor %}
+                          </ul>             
+                </div>
+              </div>
+                      {% endif %}
+                      <br>
+                      <br>
+                      <form method = 'POST' enctype="multipart/form-data" novalidate id = "form">
+                        {% csrf_token %}
+                        <div class="x_content">
+                          <div class="btn-group">
+                            <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="fa fa-picture-o"></i></a>
+                            <input type="file" data-role="magic-overlay" name = "picture"/>
+                          </div>
+                        <div class="input-group">
+                            <textarea maxlength= "300" id = "contentarea" name = "content" placeholder="Partilhe algo de útil com a comunidade" style="margin: 0px; width: 642px; height: 91px;"></textarea>
+                            <div style="color: green" id="charactersRemaining"></div>
+                        <br>
+                                <button type="submit" class="btn btn-success">Enviar</button>
+                                </form>
+                                </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+  {{ block.super }}
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
+  <script src="/static/post.js"></script>
+{% endblock javascripts %}
+
