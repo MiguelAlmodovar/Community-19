@@ -30,15 +30,15 @@
                 <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" method="POST" action="" enctype="multipart/form-data" novalidate="">
                   {% csrf_token%}
                   <p><label for="id_username">Username:</label> <input type="text" name="username" value="{{request.user.username}}" maxlength="150" required="" id="id_username"></p>
-        <p><label for="id_first_name">Primeiro nome:</label> <input type="text" name="first_name" value="{{request.user.first_name}}" maxlength="30" required="" id="id_first_name"></p>
-        <p><label for="id_last_name">Último nome:</label> <input type="text" name="last_name" value="{{request.user.last_name}}" maxlength="150" required="" id="id_last_name"></p>
+        <p><label for="id_first_name">First Name:</label> <input type="text" name="first_name" value="{{request.user.first_name}}" maxlength="30" required="" id="id_first_name"></p>
+        <p><label for="id_last_name">Last Name:</label> <input type="text" name="last_name" value="{{request.user.last_name}}" maxlength="150" required="" id="id_last_name"></p>
         <p><label for="id_email">E-mail:</label> <input type="email" name="email" value="{{request.user.email}}"  required="" maxlength="254" id="id_email"></p>
         
-        </div> <span class="helptext">Para alterar a sua password, clique <a href="{% url 'reset_password' %}">aqui</a>.</span><p></p>
-                  <p><label for="id_profile_pic">Imagem de perfil:</label> Atualmente: <a href="{{request.user.profile.profile_pic.url}}">1c419e73-0e7d-4e74-b6aa-db9e9af66f88.JPG</a><br>
+        </div> <span class="helptext">To reset your password, click <a href="{% url 'reset_password' %}">here</a>.</span><p></p>
+                  <p><label for="id_profile_pic">Profile Image:</label> Now: <a href="{{request.user.profile.profile_pic.url}}">1c419e73-0e7d-4e74-b6aa-db9e9af66f88.JPG</a><br>
         Change:
         <input required="" type="file" name="profile_pic" accept="image/*" id="id_profile_pic"></p>
-                              <button type="submit" class="btn btn-success">Alterar</button>
+                              <button type="submit" class="btn btn-success">Change</button>
                             </form>
                   </div>
                 </form>

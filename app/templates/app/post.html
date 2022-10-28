@@ -62,18 +62,18 @@
                           </li>
                       </ul>
                       {% if post.reply_to  %}
-                      <a href="{% url 'post' post.reply_to.id %}"><i class="fa fa-reply"></i>Voltar ao comenário original</a>
+                      <a href="{% url 'post' post.reply_to.id %}"><i class="fa fa-reply"></i> Go back to the top</a>
                       {% endif %}
                       {% if request.user == post.author %}
-                        <a href = "{% url 'deleteownpost' post.id %}" ><i class="fa fa-close"></i> Apagar post </a>
+                        <a href = "{% url 'deleteownpost' post.id %}" ><i class="fa fa-close"></i> Delete post </a>
                       {% elif request.user.is_superuser %}
-                          <a href = "{% url 'deletepost' post.id %}" ><i class="fa fa-close"></i> Apagar post </a>
+                          <a href = "{% url 'deletepost' post.id %}" ><i class="fa fa-close"></i> Delete post</a>
                       {% endif %}
                   </div>
                       <br>
                       <div class="clearfix"></div>
                       {% if comments %}
-                      <h3>Comentários</h3>
+                      <h3>Comments</h3>
                       <div class="x_content">
                           <ul class="list-unstyled msg_list">
                               {% for post in comments %}
@@ -119,10 +119,10 @@
                             <input type="file" data-role="magic-overlay" name = "picture"/>
                           </div>
                         <div class="input-group">
-                            <textarea maxlength= "300" id = "contentarea" name = "content" placeholder="Partilhe algo de útil com a comunidade" style="margin: 0px; width: 642px; height: 91px;"></textarea>
+                            <textarea maxlength= "300" id = "contentarea" name = "content" placeholder="Share something with the community" style="margin: 0px; width: 642px; height: 91px;"></textarea>
                             <div style="color: green" id="charactersRemaining"></div>
                         <br>
-                                <button type="submit" class="btn btn-success">Enviar</button>
+                                <button type="submit" class="btn btn-success">Send</button>
                                 </form>
                                 </div>
                       </div>

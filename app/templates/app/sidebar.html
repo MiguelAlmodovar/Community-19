@@ -1,6 +1,6 @@
 <div class="left_col scroll-view">
   <div class="navbar nav_title" style="border: 0;">
-    <a href="{% url 'home' %}" class="site_title"><i class="fa fa-group"></i> <span>Comunidade-19</span></a>
+    <a href="{% url 'home' %}" class="site_title"><i class="fa fa-group"></i> <span>Community-19</span></a>
   </div>
 
   <div class="clearfix"></div>
@@ -11,7 +11,7 @@
       <img src="{{request.user.profile.profile_pic.url}}" alt="..." class="img-circle profile_img">
     </div>
     <div class="profile_info">
-      <span>Bem-vindo,</span>
+      <span>Welcome,</span>
       <h2>{{request.user.first_name}} {{request.user.last_name}}</h2>
     </div>
   </div>
@@ -28,14 +28,14 @@
         </li>
         <li><a href = "{% url 'posts' %}"><i class="fa fa-edit"></i> Posts</a>
         </li>
-        <li><a><i class="fa fa-desktop"></i> Anúncios <span class="fa fa-chevron-down"></span></a>
+        <li><a><i class="fa fa-desktop"></i> Listings <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="{% url 'createa' %}">Criar um anúncio</a></li>
-            <li><a href="{% url 'announcements' %}">Visualizar anúncios</a></li>
+            <li><a href="{% url 'createa' %}">Create listing</a></li>
+            <li><a href="{% url 'announcements' %}">View listings</a></li>
           </ul>
         </li>
         {% if request.user.is_superuser %}
-        <li><a href="{% url 'adminpanel' %}"><i class="fa fa-user"></i> Painel de Adminstração</a>
+        <li><a href="{% url 'adminpanel' %}"><i class="fa fa-user"></i> Admin Panel</a>
         </li>
         {% endif %}
     </div>

@@ -28,7 +28,6 @@ def home(request):
         size = request.POST['size']
     response = requests.get('http://newsapi.org/v2/everything?'
     'q=' + q + '&'
-    'domains=record.pt,publico.pt,sicnoticias.pt,sapo.pt,abola.pt,jn.pt,cmjornal.pt,dn.pt,rtp.pt&'
     'from=' + yesterday +'&'
     'to=' + today + '&'
     'pageSize=' + size + '&'
@@ -46,10 +45,10 @@ def login_view(request):
        user = authenticate(request, username=username, password = password)
        if user is not None:
            login(request, user)
-           messages.success(request,'Autenticado com sucesso')
+           messages.success(request,'Logged in successfully')
            return redirect('home') 
        else:
-            messages.error(request,'O seu username e a sua password não coincidem')
+            messages.error(request,'Your user and password dont match')
             return redirect('login_view')
     else:   
         return render(request,'app/login.html',{'form':form})
@@ -69,7 +68,7 @@ def register(request):
 				user=user,
                 profile_pic = 'profile2.png',
 				)
-            messages.success(request,'Conta criada com sucesso')    
+            messages.success(request,'Successfully registered')    
             return redirect('login_view')  
         else:
             form = userForm()
@@ -94,7 +93,7 @@ def accountSettings(request):
             profile = form_profile.save(commit=False)
             profile.user = user
             profile.save()
-            messages.success(request,'Alterações guardadas.')
+            messages.success(request,'Changes Saved.')
     return render(request, 'app/edit_profile.html')
     
 
@@ -121,7 +120,7 @@ def posts(request):
             picture = picture,
             yt_link = yt_link,
             )
-        messages.success(request, 'Post criado com sucesso')  
+        messages.success(request, 'Post created')  
         return redirect('post',p.id)    
     return render(request,'app/posts.html',context)  
 
@@ -148,7 +147,7 @@ def post(request, pk):
         post.ncomments += 1
         post.save() 
         context = {'post': post, 'comments': comments} 
-        messages.success(request, 'Comentário criado com sucesso')  
+        messages.success(request, 'Comement created')  
         return redirect('post',p.id)   
     if not comments:   
          context = {'post': post}
@@ -162,7 +161,7 @@ def upvote(request, pk):
     post = get_object_or_404(Post,pk = pk)
     post.upvotes += 1
     post.save()
-    messages.success(request, 'Um gosto foi deixado no post')    
+    messages.success(request, 'You liked the post')    
     return redirect('post', post.id)
     
 
@@ -172,7 +171,7 @@ def downvote(request, pk):
     post = get_object_or_404(Post,pk = pk)
     post.downvotes += 1
     post.save()
-    messages.success(request, 'O post foi reportado')
+    messages.success(request, 'Post was reported')
     return redirect('post', post.id)
 
 
@@ -201,7 +200,7 @@ def createa(request):
             category = category,
             picture = picture,
         )
-        messages.success(request, 'Anúncio criado com sucesso')
+        messages.success(request, 'Listing created')
         return redirect('announcement', a.id)
     return render(request, 'app/createa.html')
 
@@ -228,7 +227,7 @@ def report(request, pk):
     announcement = get_object_or_404(Announcement,pk = pk)
     announcement.reports += 1
     announcement.save()
-    messages.success(request,'O post foi reportado e será analisado por um adminstrador')
+    messages.success(request,'Post was reported')
     return redirect('announcement',announcement.id)    
 
 
@@ -250,7 +249,7 @@ def deletepost(request, pk):
             post.reply_to.ncomments -= 1
             post.reply_to.save()
         post.delete()
-        messages.success(request, 'O post foi apagado')
+        messages.success(request, 'Post deleted')
         return redirect('adminpanel')
     context = {'post':post, 'item':'post'}
     return render(request, 'app/delete.html', context)
@@ -264,7 +263,7 @@ def deleteownpost(request, pk):
                 post.reply_to.ncomments -= 1
                 post.reply_to.save()
             post.delete()
-            messages.success(request, 'O post foi apagado')
+            messages.success(request, 'Post deleted')
             return redirect('posts')
         else:
             return HttpResponseForbidden()
@@ -288,7 +287,7 @@ def deletea(request, pk):
     announcement = Announcement.objects.get(id=pk)
     if request.method == "POST":
         announcement.delete()
-        messages.success(request, 'O anúncio foi apagado')
+        messages.success(request, 'Listing deleted')
         return redirect('adminpanel')
     context = {'announcement':announcement,  'item':'anúncio'}
     return render(request, 'app/delete.html', context) 
@@ -299,7 +298,7 @@ def deleteowna(request, pk):
     if request.method=="POST":  
         if request.user == announcement.author: 
             announcement.delete()
-            messages.success(request, 'O anúncio foi apagado')
+            messages.success(request, 'Listing deleted')
             return redirect('announcements')
         else:
             return HttpResponseForbidden()
@@ -323,12 +322,12 @@ def deleteuser(request,pk):
     profile = Profile.objects.get(user = user)
     if request.method == "POST":
         if request.user == user:
-            messages.error(request, 'Não se pode apagar a si mesmo')
+            messages.error(request, 'Cant delete yourself')
             return redirect('adminpanel')
         else:    
             user.delete()
             profile.delete()
-            messages.success(request, 'O utilizador foi apagado')
+            messages.success(request, 'User deleted')
             return redirect('adminpanel')
     context = {'user': user, 'item':'utilizador'}
     return render(request, 'app/delete.html', context)

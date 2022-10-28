@@ -44,8 +44,8 @@ class Profile(models.Model):
 #Model do Anúncio
 class Announcement(models.Model):
     CATEGORY = (
-			('Comercial', 'Comercial'),
-			('Voluntariado', 'Voluntariado'),
+			('Commercial', 'Commercial'),
+			('Voluntary', 'Voluntary'),
 			) 
     author = models.ForeignKey(User, on_delete=models.CASCADE, null = False)
     content = models.TextField(max_length=300, null = False)

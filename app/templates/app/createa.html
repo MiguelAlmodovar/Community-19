@@ -12,7 +12,7 @@
 <div class="right_col" role="main">
     <div class="page-title">
         <div class="title_left">
-          <h3>Criar Anúncio</h3>
+          <h3>Create listing</h3>
         </div>
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="clearfix"></div>
@@ -22,40 +22,40 @@
               <form id="demo-form2" method = 'POST' data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data" novalidate>
                   {% csrf_token %}
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Título<span class="required">*</span>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Title<span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
             <input type="text" id="title" required="required" name ="title" class="form-control col-md-7 col-xs-12" maxlength = "20">
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Descrição <span class="required">*</span>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Description <span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
             <textarea maxlength= "300" id = "content" name = "content"  style="margin: 0px; width: 599px; height: 94px;"></textarea>
           </div>
         </div>
         <div class="form-group">
-          <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Contacto</label>
+          <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Contact</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
             <input id="contact" name = "contact" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" maxlength = "50">
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo</label>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">Type</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
             <div id="gender" class="btn-group" data-toggle="buttons">
               <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                <input type="radio" name="category" value="Comercial" id = "category"> &nbsp; Comercial &nbsp;
+                <input type="radio" name="category" value="Commercial" id = "category"> &nbsp; Commercial &nbsp;
               </label>
               <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                <input type="radio" name="category" value="Voluntariado" id = "category" required = true> Voluntário
+                <input type="radio" name="category" value="Voluntary" id = "category" required = true> Voluntary
               </label>
             </div>
           </div>
         </div>
         <div class="form-group">
-          <label for="picture" class="control-label col-md-3 col-sm-3 col-xs-12">Imagem</label>
+          <label for="picture" class="control-label col-md-3 col-sm-3 col-xs-12">Image</label>
           <div class="col-md-6 col-sm-6 col-xs-12">
               <input type="file" name="imagem"> 
           </div>

@@ -11,7 +11,7 @@
       <div class="">
         <div class="page-title">
           <div class="title_left">
-            <h3>Página Inicial</h3>
+            <h3>Homepage</h3>
           </div>
         </div>
 
@@ -33,16 +33,16 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <div class="x_panel">
                     <div class="x_title">
-                      <h2>Notícias do Dia</h2>
+                      <h2>Daily News</h2>
                       <div class="clearfix"></div>
                     </div>
                     <form method="POST">
                       {% csrf_token %}
                     <div class="x_content">
                         <div class="input-group">
-                            <input type="text" name = "q" class="form-control" placeholder="Introduza um tópico">
+                            <input type="text" name = "q" class="form-control" placeholder="Search for a topic">
                             <span class="input-group-btn">
-                                              <button type="submit" class="btn btn-success">Procurar</button>
+                                              <button type="submit" class="btn btn-success">Search</button>
                                             </span>
                                               <select id="size" name = "size">
                                                   <option value="5">5</option>
@@ -82,7 +82,7 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <div class="x_panel">
                     <div class="x_title">
-                      <h2>Meteorologia</h2>
+                      <h2>Weather</h2>
                       <div class="clearfix"></div>
                     </div>
                     <div class="x_content">

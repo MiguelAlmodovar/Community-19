@@ -10,10 +10,10 @@ class loginForm(forms.Form):
 
     #Form de criação do user
 class userForm(UserCreationForm):
-    username = forms.CharField(required=True, min_length= 5, max_length=30)
-    first_name = forms.CharField(required=True, min_length= 5, max_length=30)
-    last_name = forms.CharField(required=True, min_length= 5, max_length=30)
-    email = forms.EmailField(required=True, min_length= 10, max_length=50)
+    username = forms.CharField(required=True,  max_length=30)
+    first_name = forms.CharField(required=True,  max_length=30)
+    last_name = forms.CharField(required=True,  max_length=30)
+    email = forms.EmailField(required=True, max_length=50)
     class Meta:
         model = User
         fields = {'first_name','username','last_name','email','password1','password2'}    

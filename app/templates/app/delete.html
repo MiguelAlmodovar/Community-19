@@ -11,7 +11,7 @@
       <div class="">
         <div class="page-title">
           <div class="title_left">
-            <h3>Painel de Adminstração</h3>
+            <h3>Admin Panel</h3>
           </div>
         <div class="clearfix"></div>
         </div>
@@ -21,12 +21,12 @@
                       <br>
                             
                             
-                                  <p>Tem a certeza que pretende eliminar este {{ item }}?</p>
+                                  <p>Are you sure you want to delete this {{ item }}?</p>
                             
                                   <form method="POST">
                                     
                                     {% csrf_token %}
-                                    <a class="btn btn-warning" href="{% url 'adminpanel' %}">Cancelar</a>
+                                    <a class="btn btn-warning" href="{% url 'adminpanel' %}">Cancel</a>
                             
                                     <input class="btn btn-danger" type="submit" name="Confirm">
                                   </form>
